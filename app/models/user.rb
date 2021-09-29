@@ -5,4 +5,6 @@ class User < ApplicationRecord
         :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
     has_many :bets
     has_many :bet_notes, through: :bets
+
+    searchkick text_middle: [:username, :email]
 end

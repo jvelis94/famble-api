@@ -6,9 +6,9 @@ class Api::UsersController < Api::BaseController
       puts 'PARAMS AREEEEEE PARAMS AREEEE PARAMS AREEEEE'
       puts params
       if params[:query]
-        @users = User.search(params[:query]).order("created_at DESC")
+        @users = User.search(params[:query], fields: [:username, :email], match: :text_middle)
       else
-        @users = User.all.order('created_at DESC')
+        @users = User.all
       end
       render json: @users
     end
