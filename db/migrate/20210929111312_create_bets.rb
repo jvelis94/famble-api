@@ -1,8 +1,6 @@
 class CreateBets < ActiveRecord::Migration[6.1]
   def change
     create_table :bets do |t|
-      t.integer :bet_maker
-      t.integer :bet_receiver
       t.string :name
       t.string :category
       t.datetime :start_date, default: -> { 'CURRENT_TIMESTAMP' }
@@ -10,7 +8,9 @@ class CreateBets < ActiveRecord::Migration[6.1]
       t.float :wager_amount
       t.string :status, default: "open"
       t.text :rules
-
+      
+      t.integer :bet_maker_id
+      t.integer :bet_receiver_id
       t.timestamps
     end
   end

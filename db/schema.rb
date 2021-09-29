@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_28_192707) do
+ActiveRecord::Schema.define(version: 2021_09_29_111312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bets", force: :cascade do |t|
+    t.string "name"
+    t.string "category"
+    t.datetime "start_date", default: -> { "CURRENT_TIMESTAMP" }
+    t.date "end_date"
+    t.float "wager_amount"
+    t.string "status", default: "open"
+    t.text "rules"
+    t.integer "bet_maker_id"
+    t.integer "bet_receiver_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "jwt_denylist", force: :cascade do |t|
     t.string "jti", null: false
