@@ -1,4 +1,4 @@
-class API::BetsController < ApplicationController
+class Api::BetsController < ApplicationController
 
     def create
         @bet = Bet.new(bet_params)
@@ -16,4 +16,6 @@ class API::BetsController < ApplicationController
             :name, :category, :start_date, :end_date, :wager_amount, :rules, :bet_maker_id, :bet_receiver_id
         )
     end
+
+    
 end
