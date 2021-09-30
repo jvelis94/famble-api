@@ -1,5 +1,10 @@
 class Api::BetsController < ApplicationController
 
+    def index
+        @bets = Bet.all
+        render json: @bets
+    end
+
     def create
         @bet = Bet.new(bet_params)
         if @bet.save
