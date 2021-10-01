@@ -8,6 +8,7 @@ class Api::BetsController < ApplicationController
     def create
         @bet = Bet.new(bet_params)
         if @bet.save
+            ActionCable.server.broadcast "bet_#{@bet.id}", @bet
             render json: @bet
         else
             render json: @bet.errors.full_messages
