@@ -9,8 +9,7 @@ class Api::BetsController < ApplicationController
         @bet = Bet.new(bet_params)
         if @bet.save
             @bet_notification = Notification.create!(recipient_id: @bet.bet_receiver_id, actor_id: @bet.bet_maker_id, action: "started a new bet with you", notifiable: @bet)
-            # NotificationChannel.broadcast_to(@bet.bet_receiver, {notification: @bet_notification} )
-            ActionCable.server.broadcast "NotificationsChannel", @bet_notification
+            ActionCable.server.broadcast "notifications_#{@bet.bet_receiver_id}", @bet_notification
             render json: @bet
         else
             render json: @bet.errors.full_messages
